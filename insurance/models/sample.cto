@@ -1,0 +1,31 @@
+namespace org.tailian.insurance
+
+asset User identified by userId {
+  o String userId
+  //账户余额
+  o Integer balance
+    //金额变动列表
+  o Change[] changeList 
+}
+
+//金额变动
+concept Change {
+  //操作时区块链服务器时间
+  o DateTime time
+  //变动金额
+  o Integer amount
+  //操作后的金额
+  o Integer balance
+  //0：充值，1:扣款
+  o Integer type 
+  //充值计划Id
+  o Integer pid 
+}
+
+//金额变动动作
+transaction ChangeTransaction{
+  o Integer amount
+  o Integer type
+  o Integer pid 
+  --> User user
+}
